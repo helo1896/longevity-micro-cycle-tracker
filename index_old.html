@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longevity Micro-Cycle Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mtor: '#ef4444',     // Red for Growth
+                        ampk: '#3b82f6',     // Blue for Cleansing
+                        recovery: '#10b981', // Green for Recovery
+                        surface: '#1f2937',
+                        background: '#111827'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #111827;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+        }
+        .checkbox-custom:checked + div {
+            background-color: currentColor;
+            border-color: currentColor;
+        }
+        .checkbox-custom:checked + div svg {
+            display: block;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex justify-center">
+
+    <div class="max-w-3xl w-full bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-800">
+        
+        <!-- Header -->
+        <div class="p-6 md:p-8 border-b border-gray-800 flex justify-between items-center bg-gray-800/50">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Weekly Protocol</h1>
+                <p class="text-gray-400 text-sm">Block Periodization (4-2-1) Split</p>
+            </div>
+            <div id="phase-badge" class="px-4 py-2 rounded-full font-bold text-sm tracking-wide shadow-lg border">
+                PHASE
+            </div>
+        </div>
+
+        <div class="flex overflow-x-auto border-b border-gray-800 hide-scrollbar bg-gray-900">
+            <button onclick="selectDay(0)" id="tab-0" class="flex-shrink-0 px-6 py-4 text-sm font-semibold transition-colors focus:outline-none">MON</button>
+            <button onclick="selectDay(1)" id="tab-1" class="flex-shrink-0 px-6 py-4 text-sm font-semibold transition-colors focus:outline-none">TUE</button>
+            <button onclick="selectDay(2)" id="tab-2" class="flex-shrink-0 px-6 py-4 text-sm font-semibold transition-colors focus:outline-none">WED</button>
+            <button onclick="selectDay(3)" id="tab-3" class="flex-shrink-0 px-6 py-4 text-sm font-semibold transition-colors focus:outline-none">THU</button>
+            <button onclick="selectDay(4)" id="tab-4" class="flex-shrink-0 px-6 py-4 text-sm font-semibold transition-colors focus:outline-none">FRI</button>
+            <button onclick="selectDay(5)" id="tab-5" class="flex-shrink-0 px-6 py-4 text-sm font-semibold transition-colors focus:outline-none">SAT</button>
+            <button onclick="selectDay(6)" id="tab-6" class="flex-shrink-0 px-6 py-4 text-sm font-semibold transition-colors focus:outline-none">SUN</button>
+        </div>
+
+        <div class="p-6 md:p-8 bg-gray-900 h-[600px] overflow-y-auto" id="tasks-container">
+            <!-- Tasks will be injected here via JavaScript -->
+        </div>
+
+    </div>
+
+    <script>
+        // Protocol Data Definition
+        const protocols = {
+            mtor: {
+                name: "mTOR (Growth)",
+                color: "text-mtor",
+                bg: "bg-red-500/10",
+                border: "border-red-500/30",
+                checkbox: "text-red-500",
+                tasks: [
+                    { time: "Morning", title: "Wake & Focus", desc: "Flow tDCS for work/focus. Do not exercise." },
+                    { time: "Morning", title: "Breakfast & Supps", desc: "High protein meal. Take Vitamin D3+K2, Omega-3s." },
+                    { time: "Pre-Workout", title: "Nitric Oxide Primer", desc: "Consume Beetroot juice 90-120 mins before lifting. The dietary nitrates maximize vasodilation, blood flow, and mechanical tension capacity." },
+                    { time: "Afternoon", title: "Resistance Training", desc: "Dumbbell routine (up to 20kg). 3-second eccentric lowering. STRICT RULE: Keep it mechanical. Do not push to anaerobic/gasping levels to protect Saturday's REHIT recovery." },
+                    { time: "Post-Workout", title: "Creatine & Protein", desc: "5g Creatine + High Protein meal (30-40g) within 2 hours." },
+                    { time: "Evening", title: "Red Light Therapy", desc: "10-20 mins Flowlight 4300 for ATP/muscle repair." },
+                    { time: "Night", title: "Sleep Protocol", desc: "Magnesium + 50mg Apigenin before bed." }
+                ]
+            },
+            mtor_repair: {
+                name: "mTOR (Repair & Prep)",
+                color: "text-mtor",
+                bg: "bg-red-500/10",
+                border: "border-red-500/30",
+                checkbox: "text-red-500",
+                tasks: [
+                    { time: "Morning", title: "Breakfast & Supps", desc: "High protein meal. Take Vitamin D3+K2, Omega-3s, B-Vitamins." },
+                    { time: "Mid-Day", title: "Active Recovery", desc: "Light mobility or walking. No heavy dumbbell lifting today." },
+                    { time: "Afternoon", title: "Final Protein Pulse", desc: "Last high-protein meal to finalize muscle repair from Wednesday's workout." },
+                    { time: "Evening (8 PM)", title: "Initiate Fast", desc: "Stop all caloric intake. Water and black tea/coffee only until Saturday afternoon." },
+                    { time: "Night", title: "Sleep Protocol", desc: "Magnesium + 50mg Apigenin before bed." }
+                ]
+            },
+            ampk: {
+                name: "AMPK (Deep Fasting)",
+                color: "text-ampk",
+                bg: "bg-blue-500/10",
+                border: "border-blue-500/30",
+                checkbox: "text-blue-500",
+                tasks: [
+                    { time: "Morning", title: "Fasted Supplements", desc: "Trans-Resveratrol, Trans-Pterostilbene, Longvida Curcumin bridged with Omega-3s." },
+                    { time: "Morning", title: "Wake & Focus", desc: "Flow tDCS while fasting. Black coffee or water only." },
+                    { time: "Mid-Day", title: "Active Fasting", desc: "Stay hydrated. Maintain focus state. No caloric intake." },
+                    { time: "Late Afternoon", title: "The 'Fat Fast' Meal", desc: "Break the water fast to restore energy for tomorrow's REHIT. Eat a meal of pure fats and fiber (e.g., Avocado, Macadamia nuts, Olive oil, green salad). STRICT RULE: Zero protein, zero carbs. This tricks the body into staying in AMPK while giving you fuel." },
+                    { time: "Night", title: "Sleep Protocol", desc: "Magnesium + 50mg Apigenin before bed." }
+                ]
+            },
+            ampk_rehit: {
+                name: "AMPK (REHIT VO2 Max)",
+                color: "text-ampk",
+                bg: "bg-blue-500/10",
+                border: "border-blue-500/30",
+                checkbox: "text-blue-500",
+                tasks: [
+                    { time: "Morning", title: "Fasted Supplements", desc: "Trans-Resveratrol, Trans-Pterostilbene, Longvida Curcumin bridged with Omega-3s." },
+                    { time: "Morning", title: "10-Min REHIT (Elliptical)", desc: "3m warm-up -> 20s ALL-OUT SPRINT (high resistance) -> 3m active recovery -> 20s ALL-OUT SPRINT -> 3m20s cool-down." },
+                    { time: "Post-Workout", title: "Hot Shower Booster", desc: "Take a hot shower immediately post-REHIT to simulate altitude stress and expand blood plasma volume." },
+                    { time: "Afternoon", title: "Break Fast", desc: "Break the 16-20hr fast. Low protein meal. Take Matcha Tea & B-Vitamins." },
+                    { time: "Night", title: "Sleep Protocol", desc: "Magnesium + 50mg Apigenin before bed." }
+                ]
+            },
+            recovery: {
+                name: "Systemic Recovery",
+                color: "text-recovery",
+                bg: "bg-green-500/10",
+                border: "border-green-500/30",
+                checkbox: "text-green-500",
+                tasks: [
+                    { time: "All Day", title: "Family & Rest", desc: "Eat at maintenance calories. Active recovery (walking/playing with kids)." },
+                    { time: "Morning", title: "Baseline Supps", desc: "Vitamin D3+K2, Omega-3s, B-Vitamins with breakfast." },
+                    { time: "Mid-Day", title: "CNS Reset", desc: "Zero high-intensity stress. Let ROS naturally signal VO2 max adaptations from yesterday's REHIT without antioxidant interference." },
+                    { time: "Night", title: "Sleep Protocol", desc: "Magnesium before bed to prep for Monday's mechanical lifting." }
+                ]
+            }
+        };
+
+        // Day Mapping
+        const schedule = [
+            protocols.mtor,        // Mon: Lift (Controlled, no anaerobic)
+            protocols.mtor,        // Tue: Lift
+            protocols.mtor,        // Wed: Lift
+            protocols.mtor_repair, // Thu: Repair & Feed -> Fast evening
+            protocols.ampk,        // Fri: Deep Fasting (Autophagy peak)
+            protocols.ampk_rehit,  // Sat: Fasted REHIT + Break fast in afternoon
+            protocols.recovery     // Sun: Systemic Baseline
+        ];
+
+        // State Management
+        let currentDay = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1; // 0=Mon, 6=Sun
+        const state = JSON.parse(localStorage.getItem('longevityState')) || {};
+
+        function renderTasks(dayIndex) {
+            const protocol = schedule[dayIndex];
+            const container = document.getElementById('tasks-container');
+            const badge = document.getElementById('phase-badge');
+
+            // Update Badge
+            badge.className = `px-4 py-2 rounded-full font-bold text-sm tracking-wide shadow-lg border ${protocol.color} ${protocol.bg} ${protocol.border}`;
+            badge.innerText = protocol.name;
+
+            // Generate Tasks HTML
+            let html = '<div class="space-y-4">';
+            protocol.tasks.forEach((task, index) => {
+                const taskId = `day-${dayIndex}-task-${index}`;
+                const isChecked = state[taskId] || false;
+                
+                html += `
+                    <label class="flex items-start p-4 rounded-xl border border-gray-800 bg-gray-800/30 hover:bg-gray-800/60 cursor-pointer transition-all">
+                        <div class="flex-shrink-0 mt-1 relative">
+                            <input type="checkbox" class="checkbox-custom opacity-0 absolute w-0 h-0" 
+                                ${isChecked ? 'checked' : ''} 
+                                onchange="toggleTask('${taskId}')">
+                            <div class="w-6 h-6 border-2 border-gray-600 rounded flex justify-center items-center transition-colors ${protocol.checkbox}">
+                                <svg class="w-4 h-4 text-white hidden pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <span class="text-xs font-bold uppercase tracking-wider ${protocol.color}">${task.time}</span>
+                            <h3 class="text-lg font-semibold text-gray-100 mt-1 ${isChecked ? 'line-through text-gray-500' : ''}" id="title-${taskId}">${task.title}</h3>
+                            <p class="text-gray-400 text-sm mt-1 leading-relaxed ${isChecked ? 'opacity-50' : ''}" id="desc-${taskId}">${task.desc}</p>
+                        </div>
+                    </label>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function selectDay(index) {
+            currentDay = index;
+            
+            // Update Tabs
+            for (let i = 0; i < 7; i++) {
+                const tab = document.getElementById(`tab-${i}`);
+                if (i === index) {
+                    const colorClass = schedule[i].color;
+                    const borderClass = schedule[i].color.replace('text-', 'border-');
+                    tab.className = `flex-shrink-0 px-6 py-4 text-sm font-bold transition-all focus:outline-none border-b-2 bg-gray-800/30 ${colorClass} ${borderClass}`;
+                } else {
+                    tab.className = `flex-shrink-0 px-6 py-4 text-sm font-medium text-gray-500 hover:text-gray-300 transition-colors focus:outline-none border-b-2 border-transparent`;
+                }
+            }
+            
+            renderTasks(index);
+        }
+
+        function toggleTask(taskId) {
+            state[taskId] = !state[taskId];
+            localStorage.setItem('longevityState', JSON.stringify(state));
+            
+            // Visual update without full re-render
+            const title = document.getElementById(`title-${taskId}`);
+            const desc = document.getElementById(`desc-${taskId}`);
+            
+            if (state[taskId]) {
+                title.classList.add('line-through', 'text-gray-500');
+                desc.classList.add('opacity-50');
+            } else {
+                title.classList.remove('line-through', 'text-gray-500');
+                desc.classList.remove('opacity-50');
+            }
+        }
+
+        // Initialize App
+        selectDay(currentDay);
+
+    </script>
+</body>
+</html>
