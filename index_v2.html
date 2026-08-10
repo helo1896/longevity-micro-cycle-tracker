@@ -88,17 +88,16 @@
 
             <!-- Table wrapper for horizontal scrolling on mobile -->
             <div class="table-container overflow-x-auto w-full">
-                <table class="w-full text-left border-collapse min-w-[1100px]">
+                <table class="w-full text-left border-collapse min-w-[1000px]">
                     <thead>
                         <tr class="bg-slate-800 border-b border-slate-700 text-slate-300 text-xs uppercase tracking-wider">
-                            <th class="p-4 font-semibold w-[8%]">Day</th>
-                            <th class="p-4 font-semibold w-[16%]">Workout</th>
+                            <th class="p-4 font-semibold w-[10%]">Day</th>
+                            <th class="p-4 font-semibold w-[18%]">Workout</th>
                             <th class="p-4 font-semibold w-[12%]">HR Limit</th>
-                            <th class="p-4 font-semibold w-[14%]">Diet</th>
-                            <th class="p-4 font-semibold w-[20%]">Supplements</th>
+                            <th class="p-4 font-semibold w-[15%]">Diet</th>
+                            <th class="p-4 font-semibold w-[25%]">Supplements</th>
                             <th class="p-4 font-semibold w-[10%]">tDCS</th>
                             <th class="p-4 font-semibold w-[10%]">Red Light</th>
-                            <th class="p-4 font-semibold w-[10%]">Sauna</th>
                         </tr>
                     </thead>
                     <tbody id="table-body" class="text-sm divide-y divide-slate-800">
@@ -115,7 +114,7 @@
                 {
                     day: "Monday",
                     workout: "<span class='font-semibold text-white'>Heavy Dumbbells</span><br><span class='text-slate-400 text-xs'>Up to 20kg. 3-sec eccentric lowering.</span>",
-                    hr: "<span class='text-red-400 font-bold'>&lt; 152 bpm</span><br><span class='text-slate-400 text-xs'>Zone 3 spikes. Rest till &lt; 131 bpm</span>",
+                    hr: "<span class='text-red-400 font-bold'>&lt; 150 bpm</span><br><span class='text-slate-400 text-xs'>Rest till &lt;110 between sets</span>",
                     diet: "Fully fed.<br>Complex carbs & high protein.",
                     supps: {
                         m: "Lion's Mane, D+K2, Fish Oil, B Vitamins",
@@ -123,13 +122,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Post-workout</span>",
-                    sauna: "<span class='text-slate-500'>Avoid</span><br><span class='text-slate-400 text-xs'>Preserve CNS for lifting</span>"
+                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Post-workout</span>"
                 },
                 {
                     day: "Tuesday",
                     workout: "<span class='font-semibold text-white'>Active Recovery</span><br><span class='text-slate-400 text-xs'>Light walking, mobility, stretching.</span>",
-                    hr: "<span class='text-green-400 font-bold'>&lt; 131 bpm</span><br><span class='text-slate-400 text-xs'>Zone 1. Blood flow only.</span>",
+                    hr: "<span class='text-green-400 font-bold'>&lt; 110 bpm</span><br><span class='text-slate-400 text-xs'>Zone 1. Blood flow only.</span>",
                     diet: "Fully fed.<br>Complex carbs & high protein.",
                     supps: {
                         m: "Lion's Mane, D+K2, Fish Oil, B Vitamins",
@@ -137,13 +135,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Evening sweep</span>",
-                    sauna: "20 mins<br><span class='text-slate-400 text-xs'>Active recovery / blood flow</span>"
+                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Evening sweep</span>"
                 },
                 {
                     day: "Wednesday",
                     workout: "<span class='font-semibold text-white'>Heavy Dumbbells</span><br><span class='text-slate-400 text-xs'>Push for progressive overload.</span>",
-                    hr: "<span class='text-red-400 font-bold'>&lt; 152 bpm</span><br><span class='text-slate-400 text-xs'>Zone 3 spikes.</span>",
+                    hr: "<span class='text-red-400 font-bold'>&lt; 150 bpm</span><br><span class='text-slate-400 text-xs'>Zone 3/4 spikes.</span>",
                     diet: "Fully fed.<br>Complex carbs & high protein.",
                     supps: {
                         m: "Lion's Mane, D+K2, Fish Oil, B Vitamins",
@@ -151,13 +148,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Post-workout</span>",
-                    sauna: "<span class='text-slate-500'>Avoid</span><br><span class='text-slate-400 text-xs'>Preserve CNS for lifting</span>"
+                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Post-workout</span>"
                 },
                 {
                     day: "Thursday",
                     workout: "<span class='font-semibold text-white'>Active Recovery</span><br><span class='text-slate-400 text-xs'>Light walking, mobility.</span>",
-                    hr: "<span class='text-green-400 font-bold'>&lt; 131 bpm</span><br><span class='text-slate-400 text-xs'>Zone 1.</span>",
+                    hr: "<span class='text-green-400 font-bold'>&lt; 110 bpm</span><br><span class='text-slate-400 text-xs'>Zone 1.</span>",
                     diet: "Fully fed.<br>Complex carbs & high protein.",
                     supps: {
                         m: "Lion's Mane, D+K2, Fish Oil, B Vitamins",
@@ -165,13 +161,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Evening sweep</span>",
-                    sauna: "20 mins<br><span class='text-slate-400 text-xs'>Active recovery / blood flow</span>"
+                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Evening sweep</span>"
                 },
                 {
                     day: "Friday",
                     workout: "<span class='font-semibold text-white'>Final Heavy Lift</span><br><span class='text-slate-400 text-xs'>Empty the tank on muscles today.</span>",
-                    hr: "<span class='text-red-400 font-bold'>&lt; 152 bpm</span><br><span class='text-slate-400 text-xs'>Zone 3 spikes.</span>",
+                    hr: "<span class='text-red-400 font-bold'>&lt; 150 bpm</span><br><span class='text-slate-400 text-xs'>Zone 3/4 spikes.</span>",
                     diet: "Fully fed.<br>Complex carbs & high protein.",
                     supps: {
                         m: "Lion's Mane, D+K2, Fish Oil, B Vitamins",
@@ -179,13 +174,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Post-workout</span>",
-                    sauna: "<span class='text-slate-500'>Avoid</span><br><span class='text-slate-400 text-xs'>Preserve CNS for lifting</span>"
+                    redlight: "10-20 mins<br><span class='text-slate-400 text-xs'>Post-workout</span>"
                 },
                 {
                     day: "Saturday",
-                    workout: "<span class='font-semibold text-white'>REHIT Sprints</span><br><span class='text-slate-400 text-xs'>2x 20s all-out. Immediate heat stress.</span>",
-                    hr: "<span class='text-purple-400 font-bold'>&gt; 175 bpm</span><br><span class='text-slate-400 text-xs'>Zone 5. Push to peak.</span>",
+                    workout: "<span class='font-semibold text-white'>REHIT Sprints</span><br><span class='text-slate-400 text-xs'>2x 20s all-out. Immediate hot shower.</span>",
+                    hr: "<span class='text-purple-400 font-bold'>MAXIMUM</span><br><span class='text-slate-400 text-xs'>Zone 5+. Push to peak.</span>",
                     diet: "High protein, complex carbs.<br>Replenish glycogen drain.",
                     supps: {
                         m: "Lion's Mane, Electrolyte Complex",
@@ -193,8 +187,7 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "<span class='text-slate-500'>Not required</span>",
-                    redlight: "15 mins<br><span class='text-slate-400 text-xs'>Post-sauna recovery</span>",
-                    sauna: "20-30 mins<br><span class='text-slate-400 text-xs'>Post-REHIT plasma expansion</span>"
+                    redlight: "15 mins<br><span class='text-slate-400 text-xs'>Post-shower cardio rec.</span>"
                 },
                 {
                     day: "Sunday",
@@ -207,15 +200,14 @@
                         n: "Magnesium, Zinc, Selenium (NO NAC)"
                     },
                     tdcs: "<span class='text-slate-500'>Not required</span>",
-                    redlight: "15 mins<br><span class='text-slate-400 text-xs'>Deep tissue relaxation</span>",
-                    sauna: "20 mins<br><span class='text-slate-400 text-xs'>Systemic relaxation</span>"
+                    redlight: "15 mins<br><span class='text-slate-400 text-xs'>Deep tissue relaxation</span>"
                 }
             ],
             2: [
                 {
                     day: "Monday",
                     workout: "<span class='font-semibold text-white'>Maint. Lift & Zone 2</span><br><span class='text-slate-400 text-xs'>Weights -20%, then 30m Z2.</span>",
-                    hr: "<span class='text-blue-400 font-bold'>132 - 138 bpm</span><br><span class='text-slate-400 text-xs'>Zone 2. Nasal breathing only.</span>",
+                    hr: "<span class='text-blue-400 font-bold'>&lt; 120 bpm</span><br><span class='text-slate-400 text-xs'>Nasal breathing only.</span>",
                     diet: "ZERO carbs.<br>High fat, high protein.",
                     supps: {
                         m: "Pterostilbene+GSE, Curcumin, Fish Oil, Lion's Mane, D+K2",
@@ -223,13 +215,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Ketotic focus</span>",
-                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Post-sauna</span>",
-                    sauna: "30 mins<br><span class='text-slate-400 text-xs'>Post-cardio AMPK boost</span>"
+                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Post-cardio</span>"
                 },
                 {
                     day: "Tuesday",
                     workout: "<span class='font-semibold text-white'>Active Rec / Light Cardio</span><br><span class='text-slate-400 text-xs'>30-45m easy jogging/elliptical.</span>",
-                    hr: "<span class='text-blue-400 font-bold'>132 - 138 bpm</span><br><span class='text-slate-400 text-xs'>Zone 2. Trust the boredom.</span>",
+                    hr: "<span class='text-blue-400 font-bold'>&lt; 120 bpm</span><br><span class='text-slate-400 text-xs'>Trust the boredom.</span>",
                     diet: "ZERO carbs.<br>High fat, mod protein.",
                     supps: {
                         m: "Pterostilbene+GSE, Curcumin, Fish Oil, Lion's Mane, D+K2",
@@ -237,13 +228,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Post-sauna</span>",
-                    sauna: "30 mins<br><span class='text-slate-400 text-xs'>Post-cardio AMPK boost</span>"
+                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Post-cardio</span>"
                 },
                 {
                     day: "Wednesday",
                     workout: "<span class='font-semibold text-white'>Maint. Lift & Zone 2</span><br><span class='text-slate-400 text-xs'>Lighter DBs, then 30m Z2.</span>",
-                    hr: "<span class='text-blue-400 font-bold'>132 - 138 bpm</span><br><span class='text-slate-400 text-xs'>Zone 2. Nasal breathing only.</span>",
+                    hr: "<span class='text-blue-400 font-bold'>&lt; 120 bpm</span><br><span class='text-slate-400 text-xs'>Nasal breathing only.</span>",
                     diet: "ZERO carbs.<br>High fat, mod protein.",
                     supps: {
                         m: "Pterostilbene+GSE, Curcumin, Fish Oil, Lion's Mane, D+K2",
@@ -251,13 +241,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Post-sauna</span>",
-                    sauna: "30 mins<br><span class='text-slate-400 text-xs'>Post-cardio AMPK boost</span>"
+                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Post-cardio</span>"
                 },
                 {
                     day: "Thursday",
                     workout: "<span class='font-semibold text-white'>The Bridge</span><br><span class='text-slate-400 text-xs'>Active rec walking or Z2.</span>",
-                    hr: "<span class='text-blue-400 font-bold'>132 - 138 bpm</span><br><span class='text-slate-400 text-xs'>Zone 2. Keep it strictly low stress.</span>",
+                    hr: "<span class='text-blue-400 font-bold'>&lt; 120 bpm</span><br><span class='text-slate-400 text-xs'>Keep it strictly low stress.</span>",
                     diet: "High fat/protein (Day).<br><span class='text-blue-300 font-bold'>HARD FAST at 8:00 PM.</span>",
                     supps: {
                         m: "Pterostilbene+GSE, Curcumin, Fish Oil, Lion's Mane, D+K2",
@@ -265,13 +254,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Evening sweep</span>",
-                    sauna: "30 mins<br><span class='text-slate-400 text-xs'>Evening glycogen drain</span>"
+                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Evening sweep</span>"
                 },
                 {
                     day: "Friday",
                     workout: "<span class='font-semibold text-white'>The Deep Cleanse</span><br><span class='text-slate-400 text-xs'>20m Z2 Elliptical.</span>",
-                    hr: "<span class='text-blue-400 font-bold'>132 - 138 bpm</span><br><span class='text-slate-400 text-xs'>Zone 2. Avoid cortisol spikes.</span>",
+                    hr: "<span class='text-blue-400 font-bold'>&lt; 120 bpm</span><br><span class='text-slate-400 text-xs'>Avoid cortisol spikes.</span>",
                     diet: "Water Fasting.<br>Break 4PM with 'Fat Fast' meal.",
                     supps: {
                         m: "Pterostilbene+GSE, Curcumin, Fish Oil, Lion's Mane, Electrolytes",
@@ -279,13 +267,12 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Deepest ketotic focus</span>",
-                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Post-sauna</span>",
-                    sauna: "30-40 mins<br><span class='text-slate-400 text-xs'>Max autophagy / HSPs</span>"
+                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Post-elliptical</span>"
                 },
                 {
                     day: "Saturday",
                     workout: "<span class='font-semibold text-white'>Extended AMPK</span><br><span class='text-slate-400 text-xs'>Light walk or easy Z2.</span>",
-                    hr: "<span class='text-green-400 font-bold'>&lt; 131 bpm</span><br><span class='text-slate-400 text-xs'>Zone 1.</span>",
+                    hr: "<span class='text-green-400 font-bold'>&lt; 110 bpm</span><br><span class='text-slate-400 text-xs'>Zone 1.</span>",
                     diet: "Fasted morning.<br>Late afternoon balanced refeed.",
                     supps: {
                         m: "Pterostilbene+GSE, Curcumin, Fish Oil, Lion's Mane, Electrolytes",
@@ -293,8 +280,7 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "20-30 mins<br><span class='text-slate-400 text-xs'>Morning focus</span>",
-                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Full body</span>",
-                    sauna: "30-40 mins<br><span class='text-slate-400 text-xs'>Morning fasted</span>"
+                    redlight: "15-20 mins<br><span class='text-slate-400 text-xs'>Full body</span>"
                 },
                 {
                     day: "Sunday",
@@ -307,8 +293,7 @@
                         n: "Magnesium, Zinc, Selenium"
                     },
                     tdcs: "<span class='text-slate-500'>Not required</span>",
-                    redlight: "15 mins<br><span class='text-slate-400 text-xs'>Full-body recovery</span>",
-                    sauna: "20 mins<br><span class='text-slate-400 text-xs'>Gentle recovery</span>"
+                    redlight: "15 mins<br><span class='text-slate-400 text-xs'>Full-body recovery</span>"
                 }
             ]
         };
@@ -343,11 +328,8 @@
                         <td class="p-4 align-top border-r border-slate-800/50 text-slate-300 leading-snug">
                             ${row.tdcs}
                         </td>
-                        <td class="p-4 align-top border-r border-slate-800/50 text-slate-300 leading-snug">
+                        <td class="p-4 align-top text-slate-300 leading-snug">
                             ${row.redlight}
-                        </td>
-                        <td class="p-4 align-top text-slate-300 leading-snug bg-slate-900/10">
-                            ${row.sauna}
                         </td>
                     </tr>
                 `;
